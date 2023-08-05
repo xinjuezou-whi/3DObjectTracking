@@ -1,5 +1,5 @@
 %YAML:1.2
-load_directory: "./"
+load_directory: ""
 intrinsics:
   f_u: 698.128
   f_v: 698.617

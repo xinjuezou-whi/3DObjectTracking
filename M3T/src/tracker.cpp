@@ -23,7 +23,7 @@ Tracker::Tracker(const std::string &name,
                  const std::filesystem::path &metafile_path)
     : name_{name}, metafile_path_{metafile_path} {}
 
-bool Tracker::SetUp(bool set_up_all_objects) {
+bool Tracker::SetUp(bool set_up_all_objects/* = true*/) {
   set_up_ = false;
   if (!metafile_path_.empty())
     if (!LoadMetaData()) return false;

@@ -19,25 +19,31 @@ cv::Mat CalculateAlphaBlend(const cv::Mat &camera_image,
   float alpha, alpha_inv;
   float alpha_scale = opacity / 255.0f;
 
+  if (renderer_image.empty())
+  {
+    std::cout << "[warn]: renderer image is empty" << std::endl;
+  }
+
   // Iterate over all pixels
+  const uchar dummy[3] = { 0, 0, 0 };
   for (v = 0; v < camera_image.rows; ++v) {
     ptr_camera_image = camera_image.ptr<cv::Vec3b>(v);
     ptr_renderer_image = renderer_image.ptr<cv::Vec4b>(v);
     ptr_image = image.ptr<cv::Vec3b>(v);
     for (u = 0; u < camera_image.cols; ++u) {
       val_camera_image = ptr_camera_image[u].val;
-      val_renderer_image = ptr_renderer_image[u].val;
+      val_renderer_image = ptr_renderer_image ? ptr_renderer_image[u].val : dummy;
       val_image = ptr_image[u].val;
 
       // Blend images
       alpha = float(val_renderer_image[3]) * alpha_scale;
       alpha_inv = 1.0f - alpha;
       val_image[0] =
-          char(val_camera_image[0] * alpha_inv + val_renderer_image[0] * alpha);
+        char(val_camera_image[0] * alpha_inv + val_renderer_image[0] * alpha);
       val_image[1] =
-          char(val_camera_image[1] * alpha_inv + val_renderer_image[1] * alpha);
+        char(val_camera_image[1] * alpha_inv + val_renderer_image[1] * alpha);
       val_image[2] =
-          char(val_camera_image[2] * alpha_inv + val_renderer_image[2] * alpha);
+        char(val_camera_image[2] * alpha_inv + val_renderer_image[2] * alpha);
     }
   }
   return image;
