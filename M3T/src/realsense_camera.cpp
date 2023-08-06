@@ -2,6 +2,7 @@
 // Copyright (c) 2023 Manuel Stoiber, German Aerospace Center (DLR)
 
 #include <m3t/realsense_camera.h>
+#include <iostream>
 
 namespace m3t {
 
@@ -31,25 +32,37 @@ bool RealSense::UnregisterID(int id) {
   return update_capture_ids_.erase(id);
 }
 
-bool RealSense::SetUp() {
+bool RealSense::SetUp()
+{
   const std::lock_guard<std::mutex> lock{mutex_};
-  if (!initial_set_up_) {
+  if (!initial_set_up_)
+  {
     // Configure camera
     if (use_color_camera_)
-      config_.enable_stream(RS2_STREAM_COLOR, 960, 540, RS2_FORMAT_BGR8, 60);
+    {
+      // config_.enable_stream(RS2_STREAM_COLOR, 960, 540, RS2_FORMAT_BGR8, 60);
+      config_.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8, 60);
+    }
     if (use_depth_camera_)
-      config_.enable_stream(RS2_STREAM_DEPTH, 848, 480, RS2_FORMAT_Z16, 60);
+    {
+      // config_.enable_stream(RS2_STREAM_DEPTH, 848, 480, RS2_FORMAT_Z16, 60);
+      config_.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16, 60);
+    }
 
     // Start camera
-    try {
+    try
+    {
       profile_ = pipe_.start(config_);
-    } catch (std::exception &e) {
+    }
+    catch (std::exception &e)
+    {
       std::cerr << e.what() << std::endl;
       return false;
     }
 
     // Get extrinsics and calculate pose
-    if (use_color_camera_ && use_depth_camera_) {
+    if (use_color_camera_ && use_depth_camera_)
+    {
       const rs2_extrinsics extrinsics =
           profile_.get_stream(RS2_STREAM_COLOR)
               .get_extrinsics_to(profile_.get_stream(RS2_STREAM_DEPTH));
@@ -63,11 +76,13 @@ bool RealSense::SetUp() {
 
     // Load multiple images to adjust to white balance
     constexpr int kNumberImagesDropped = 10;
-    for (int i = 0; i < kNumberImagesDropped; ++i) {
+    for (int i = 0; i < kNumberImagesDropped; ++i)
+    {
       pipe_.try_wait_for_frames(&frameset_);
     }
     initial_set_up_ = true;
   }
+
   return true;
 }
 
@@ -128,17 +143,29 @@ RealSenseColorCamera::~RealSenseColorCamera() {
   realsense_.UnregisterID(realsense_id_);
 }
 
-bool RealSenseColorCamera::SetUp() {
+bool RealSenseColorCamera::SetUp()
+{
   set_up_ = false;
   if (!metafile_path_.empty())
-    if (!LoadMetaData()) return false;
-  if (!initial_set_up_ && !realsense_.SetUp()) return false;
+  {
+    if (!LoadMetaData())
+    {
+      return false;
+    }
+  }
+  if (!initial_set_up_ && !realsense_.SetUp())
+  {
+    return false;
+  }
   if (use_depth_as_world_frame_)
+  {
     set_camera2world_pose(*realsense_.color2depth_pose());
+  }
   GetIntrinsics();
   SaveMetaDataIfDesired();
   set_up_ = true;
   initial_set_up_ = true;
+
   return UpdateImage(true);
 }
 
@@ -148,8 +175,10 @@ void RealSenseColorCamera::set_use_depth_as_world_frame(
   set_up_ = false;
 }
 
-bool RealSenseColorCamera::UpdateImage(bool synchronized) {
-  if (!set_up_) {
+bool RealSenseColorCamera::UpdateImage(bool synchronized)
+{
+  if (!set_up_)
+  {
     std::cerr << "Set up real sense color camera " << name_ << " first"
               << std::endl;
     return false;

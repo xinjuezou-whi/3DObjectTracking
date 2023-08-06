@@ -1,0 +1,6 @@
+# Generated
+*.bin
+
+# Directories
+build
+html

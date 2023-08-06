@@ -7,6 +7,14 @@ AzureKinectDepthCamera:
   - name: depth_camera
     metafile_path: config.yaml
 
+RealSenseColorCamera:
+  - name: color_camera
+    metafile_path: config.yaml
+
+RealSenseDepthCamera:
+  - name: depth_camera
+    metafile_path: config.yaml
+
 NormalColorViewer:
   - name: color_viewer
     metafile_path: config.yaml

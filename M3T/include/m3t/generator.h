@@ -971,7 +971,9 @@ inline bool GenerateConfiguredTracker(
 #ifdef USE_REALSENSE
   if (!ConfigureObjectsMetafileOptional<RealSenseColorCamera>(
           configfile_path, fs, "RealSenseColorCamera", &color_camera_ptrs))
+  {
     return false;
+  }
 #endif
 #ifdef USE_AZURE_KINECT
   if (!ConfigureObjectsMetafileOptional<AzureKinectColorCamera>(
@@ -987,7 +989,9 @@ inline bool GenerateConfiguredTracker(
 #ifdef USE_REALSENSE
   if (!ConfigureObjectsMetafileOptional<RealSenseDepthCamera>(
           configfile_path, fs, "RealSenseDepthCamera", &depth_camera_ptrs))
+  {
     return false;
+  }
 #endif
 #ifdef USE_AZURE_KINECT
   if (!ConfigureObjectsMetafileOptional<AzureKinectDepthCamera>(

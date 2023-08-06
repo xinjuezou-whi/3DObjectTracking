@@ -2,7 +2,8 @@
 // Copyright (c) 2023 Manuel Stoiber, German Aerospace Center (DLR)
 
 #include <filesystem/filesystem.h>
-#include <m3t/azure_kinect_camera.h>
+// #include <m3t/azure_kinect_camera.h>
+#include <m3t/realsense_camera.h>
 #include <m3t/image_viewer.h>
 #include <m3t/tracker.h>
 
@@ -16,10 +17,12 @@ int main(int argc, char *argv[]) {
   }
   const std::filesystem::path sequence_directory{argv[1]};
 
-  auto color_camera_ptr{
-      std::make_shared<m3t::AzureKinectColorCamera>("color_camera")};
-  auto depth_camera_ptr{
-      std::make_shared<m3t::AzureKinectDepthCamera>("depth_camera")};
+  // auto color_camera_ptr{
+  //     std::make_shared<m3t::AzureKinectColorCamera>("color_camera")};
+  // auto depth_camera_ptr{
+  //     std::make_shared<m3t::AzureKinectDepthCamera>("depth_camera")};
+  auto color_camera_ptr{ std::make_shared<m3t::RealSenseColorCamera>("realsense_color") };
+  auto depth_camera_ptr{ std::make_shared<m3t::RealSenseDepthCamera>("realsense_depth")} ;
   color_camera_ptr->StartSavingImages(sequence_directory);
   depth_camera_ptr->StartSavingImages(sequence_directory);
 

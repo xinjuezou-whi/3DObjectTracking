@@ -75,7 +75,7 @@ add_executable(optimization_time optimization_time.cpp)
 target_link_libraries(optimization_time PUBLIC m3t
   ${OpenCV_LIBS} stdc++fs GLEW glfw3 GL GLU dl pthread X11 gomp)
 
-if (USE_AZURE_KINECT)
+if (USE_AZURE_KINECT OR USE_REALSENSE)
     add_executable(record_camera_sequence record_camera_sequence.cpp)
     target_link_libraries(record_camera_sequence PUBLIC m3t
       ${OpenCV_LIBS} stdc++fs GLEW glfw3 GL GLU dl pthread X11 gomp)
@@ -84,7 +84,3 @@ if (USE_AZURE_KINECT)
     target_link_libraries(run_on_camera_sequence PUBLIC m3t
       ${OpenCV_LIBS} stdc++fs GLEW glfw3 GL GLU dl pthread X11 gomp)
 endif ()
-
-add_executable(run_on_camera_sequence run_on_camera_sequence.cpp)
-target_link_libraries(run_on_camera_sequence PUBLIC m3t
-  ${OpenCV_LIBS} stdc++fs GLEW glfw3 GL GLU dl pthread X11 gomp)
