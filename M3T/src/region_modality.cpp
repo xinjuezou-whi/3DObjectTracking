@@ -589,7 +589,10 @@ bool RegionModality::VisualizeResults(int save_idx) {
     VisualizePointsColorImage("color_image_result", save_idx);
   if (visualize_points_histogram_image_result_)
     VisualizePointsHistogramImage("histogram_image_result", save_idx);
-  if (visualize_pose_result_) VisualizePose();
+  if (visualize_pose_result_)
+  {
+    VisualizePose();
+  }
   return true;
 }
 

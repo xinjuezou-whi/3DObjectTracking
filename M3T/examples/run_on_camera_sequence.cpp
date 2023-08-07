@@ -41,6 +41,7 @@ int main(int argc, char *argv[]) {
   constexpr bool kMeasureOcclusions = false;
   constexpr bool kModelOcclusions = false;
   constexpr bool kVisualizePoseResult = true;
+  constexpr bool kVisualizePointsResult = false;
   constexpr bool kSaveImages = false;
   const std::filesystem::path save_directory{""};
 
@@ -114,6 +115,10 @@ int main(int argc, char *argv[]) {
         depth_model_ptr)};
     if (kVisualizePoseResult) {
       region_modality_ptr->set_visualize_pose_result(true);
+    }
+    if (kVisualizePointsResult)
+    {
+      region_modality_ptr->set_visualize_points_result(true);
     }
     if (kMeasureOcclusions) {
       region_modality_ptr->MeasureOcclusions(depth_camera_ptr);

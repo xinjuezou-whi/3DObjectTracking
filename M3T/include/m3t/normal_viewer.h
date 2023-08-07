@@ -50,9 +50,13 @@ class NormalColorViewer : public ColorViewer {
   std::shared_ptr<RendererGeometry> renderer_geometry_ptr() const override;
   float opacity() const;
 
+  void visualizeFrame(cv::Mat& DstImage);
+
  private:
   // Helper method
   bool LoadMetaData();
+
+  cv::Point2f backproject3DPoint(const Transform3fA& Pose, const cv::Point3f& Point3d);
 
   // Data
   std::shared_ptr<RendererGeometry> renderer_geometry_ptr_ = nullptr;
