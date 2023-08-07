@@ -1,0 +1,15 @@
+%YAML:1.2
+geometry_path: "io_485.obj"
+geometry_unit_in_meter: 1.0
+geometry_counterclockwise: 1
+geometry_enable_culling: 1
+geometry2body_pose: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: d
+  data: [ 0.7005,  0.1863,  0.6889,  0,
+          0.6658,  0.1771, -0.7248,  0,
+         -0.2571,  0.9664,  0.0,    -0.006,
+          0,       0,       0,       1.0 ]
+body_id: 100
+region_id: 150
