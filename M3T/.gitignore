@@ -1,6 +1,6 @@
-/*
-/*/
-*.asv
+!/*
+!/*/
+!*.asv
 doc/html
 !/include/
 !/src/
