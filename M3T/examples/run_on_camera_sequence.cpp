@@ -91,8 +91,7 @@ int main(int argc, char *argv[]) {
   // Set up silhouette renderer
   auto color_silhouette_renderer_ptr{
       std::make_shared<m3t::FocusedSilhouetteRenderer>(
-          "color_silhouette_renderer", renderer_geometry_ptr,
-          color_camera_ptr)};
+          "color_silhouette_renderer", renderer_geometry_ptr, color_camera_ptr)};
 
   for (const auto body_name : body_names) {
     // Set up body
