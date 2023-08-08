@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
 #endif
 #ifdef USE_REALSENSE
   auto color_camera_ptr{ std::make_shared<m3t::RealSenseColorCamera>("realsense_color") };
-  auto depth_camera_ptr{ std::make_shared<m3t::RealSenseDepthCamera>("realsense_depth")} ;
+  auto depth_camera_ptr{ std::make_shared<m3t::RealSenseDepthCamera>("realsense_depth") };
 #endif
   // auto color_camera_ptr = std::make_shared<m3t::V4lColorCamera>("v4l_color");
 
