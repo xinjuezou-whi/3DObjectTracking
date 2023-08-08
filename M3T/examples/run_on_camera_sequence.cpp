@@ -2,8 +2,12 @@
 // Copyright (c) 2023 Manuel Stoiber, German Aerospace Center (DLR)
 
 #include <filesystem/filesystem.h>
-//#include <m3t/azure_kinect_camera.h>
+#ifdef USE_AZURE_KINECT
+#include <m3t/azure_kinect_camera.h>
+#endif
+#ifdef USE_REALSENSE
 #include <m3t/realsense_camera.h>
+#endif
 #include <m3t/v4l_camera.h>
 #include <m3t/basic_depth_renderer.h>
 #include <m3t/body.h>
@@ -51,12 +55,16 @@ int main(int argc, char *argv[]) {
       std::make_shared<m3t::RendererGeometry>("renderer geometry")};
 
   // Set up cameras
-  // auto color_camera_ptr{
-  //     std::make_shared<m3t::AzureKinectColorCamera>("azure_kinect_color")};
-  // auto depth_camera_ptr{
-  //     std::make_shared<m3t::AzureKinectDepthCamera>("azure_kinect_depth")};
+#ifdef USE_AZURE_KINECT
+  auto color_camera_ptr{
+      std::make_shared<m3t::AzureKinectColorCamera>("azure_kinect_color")};
+  auto depth_camera_ptr{
+      std::make_shared<m3t::AzureKinectDepthCamera>("azure_kinect_depth")};
+#endif
+#ifdef USE_REALSENSE
   auto color_camera_ptr{ std::make_shared<m3t::RealSenseColorCamera>("realsense_color") };
   auto depth_camera_ptr{ std::make_shared<m3t::RealSenseDepthCamera>("realsense_depth")} ;
+#endif
   // auto color_camera_ptr = std::make_shared<m3t::V4lColorCamera>("v4l_color");
 
   // Set up viewers
