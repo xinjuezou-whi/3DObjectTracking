@@ -135,7 +135,7 @@ int main(int argc, char *argv[]) {
     auto link_ptr{std::make_shared<m3t::Link>(body_name + "_link", body_ptr)};
     if (kUseRegionModality) link_ptr->AddModality(region_modality_ptr);
     if (kUseTextureModality) link_ptr->AddModality(texture_modality_ptr);
-    // if (kUseDepthModality) link_ptr->AddModality(depth_modality_ptr);
+    if (kUseDepthModality) link_ptr->AddModality(depth_modality_ptr);
 
     // Set up optimizer
     auto optimizer_ptr{
