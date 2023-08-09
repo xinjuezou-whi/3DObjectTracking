@@ -67,7 +67,7 @@ endif ()
 
 # Default settings
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+# set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag(-march HAS_MARCH)
 check_cxx_compiler_flag(-mtune HAS_MTUNE)
