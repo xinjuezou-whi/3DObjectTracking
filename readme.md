@@ -2,6 +2,8 @@
 
 Thanks to the great work from DLR-RM! This forked branch aims to reproduce the tracking process and introduced some minor changes like drawing the frame of the 3D target, and the callback mechanism for both view and modality for propagating estimated poses
 
+Meanwhile, we have made a try at porting the M3T to ROS1, if you are interested please refer to the [repository](https://github.com/xinjuezou-whi/whi_3dobject_tracking)
+
 ![tracking](https://github.com/xinjuezou-whi/3DObjectTracking/assets/72239958/875ab07f-89c4-4918-9df3-8cd09fa8f90c)
 
 ## Build
