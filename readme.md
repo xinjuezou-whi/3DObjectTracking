@@ -1,5 +1,33 @@
 # 3D Object Tracking
 
+Thanks to the great work from DLR-RM! This forked branch aims to reproduce the tracking process and introduced some minor changes like drawing the frame of the 3D target, and the callback mechanism for both view and modality for propagating estimated poses
+
+![tracking](https://github.com/xinjuezou-whi/3DObjectTracking/assets/72239958/875ab07f-89c4-4918-9df3-8cd09fa8f90c)
+
+## Build
+
+```
+cd <your cloned root>/3DObjectTracking/M3T
+mkdir -p build && cd build
+cmake .. -DUSE_AZURE_KINECT=OFF -DUSE_REALSENSE=OFF -DOpenCV_CUDA_VERSION=ON -DCMAKE_BUILD_TYPE=Release
+make
+sudo make install
+```
+> NOTE: Change the flags "USE_AZURE_KINECT" or "USE_REALSENSE" to ON if you have the depth camera, and toggle the flag "CV_CUDA_VERSION" according to your CUDA absence
+
+## Try
+
+If you have the depth camera in hand, try the **run_on_camera_sequence** example on the triangle object to learn the capability of 3DObject tracking
+
+```
+cd <your cloned root>/3DObjectTracking/build/examples
+./run_on_camera_sequence ../../data/_body triangle
+```
+
+![triangle](https://github.com/xinjuezou-whi/3DObjectTracking/assets/72239958/7e6dff70-1e0f-4e5c-a7f1-56a3ebfad346)
+
+***<==========Bellowing contents are the original contents of 3DObjectTracking==========>***
+
 Tracking objects and kinematic structures in 3D space and determining their poses and configurations is an essential task in computer vision. Its application ranges from augmented reality to robotic perception. Given consecutive image frames, as well as 3D meshes and kinematic information, the goal is to robustly estimate the rotation and translation of all bodies relative to a camera. While the problem has been thoroughly studied, many challenges such as partial occlusions, appearance changes, motion blur, background clutter, object ambiguity, and real-time requirements still exist.
 
 In this repository, we will continuously publish algorithms and code of our ongoing research on 3D object tracking. The folders for the different algorithms include everything necessary to reproduce results presented in our papers. Note that the code for each new paper also includes an updated version of previous work. If you want to use our tracker in your own project or application, please use the code from the latest publication. Currently, the latest version of our code can be found in the folder [__M3T__](https://github.com/DLR-RM/3DObjectTracking/tree/master/M3T).
