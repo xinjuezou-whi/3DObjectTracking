@@ -13,7 +13,7 @@ cd <your cloned root>/3DObjectTracking/M3T
 mkdir -p build && cd build
 cmake .. -DUSE_AZURE_KINECT=OFF -DUSE_REALSENSE=OFF -DOpenCV_CUDA_VERSION=ON -DCMAKE_BUILD_TYPE=Release
 make
-sudo make install (optianal)
+sudo make install (optional)
 ```
 > NOTE: Change the flags "USE_AZURE_KINECT" or "USE_REALSENSE" to ON if you have the depth camera, and toggle the flag "CV_CUDA_VERSION" according to your CUDA absence
 
